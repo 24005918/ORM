@@ -44,7 +44,8 @@ class EmployeeAdmin(admin.ModelAdmin):
     list_display=('eid','name','salary','age','email')
 ```
 # OUTPUT:
-![alt text](<Screenshot 2024-11-27 090841.png>)
+<img width="1071" height="587" alt="image" src="https://github.com/user-attachments/assets/069f3343-6eb1-4e7d-9552-47ef21bf6246" />
+
 ![Screenshot_2024-11-20_162048 1](https://github.com/user-attachments/assets/29b647d1-f301-4297-8c10-d94e5d258f8a)
 
 
