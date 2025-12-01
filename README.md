@@ -22,26 +22,64 @@ Execute Django admin and create details for 10 books
 # PROGRAM:
 
 ```
+from http.server import HTTPServer, BaseHTTPRequestHandler
 
-admin.py
+content = '''
+<html>
+<head>
+<title>My Laptop</title>
+</head>
+<body>
+<center>
+    <h1>My Laptop Configuration</h1>
+    <table border="5" cellpadding="5" align="center">
+        <tr>
+            <th>System Specs</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td>Processor</td>
+            <td>13th Gen Intel(R) Core(TM) i5-1335U 1.30 GHz</td>
+        </tr>
+        <tr>
+            <td>Operating System</td>
+            <td>Windows 11 Home Single Language 64-bit</td>
+        </tr>
+        <tr>
+            <td>Graphics Card</td>
+            <td>Integrated Intel® Iris® Xe Graphics</td>
+        </tr>
+        <tr>
+            <td>Memory</td>
+            <td>16 GB DDR4-3200MHz (8 GB SODIMM + 8 GB Soldered)</td>
+        </tr>
+        <tr>
+            <td>Storage</td>
+            <td>512 GB SSD M.2 2242 PCIe Gen4 TLC Opal</td>
+        </tr>
+        <tr>
+            <td>Display</td>
+            <td>16-inch WUXGA (1920×1200), IPS, Anti-Glare, 100% sRGB, 300 nits, 60Hz</td>
+        </tr>
+    </table>
+</center>
+</body>
+</html>
+'''
 
-from django.contrib import admin
-from .models import Employee,EmployeeAdmin
-admin.site.register(Employee,EmployeeAdmin)
+class MyServer(BaseHTTPRequestHandler):
+    def do_GET(self):
+        print("GET request received...")
+        self.send_response(200)
+        self.send_header("Content-type", "text/html")
+        self.end_headers()
+        self.wfile.write(content.encode())
 
-models.py
+print("This is my webserver")
+server_address = ('', 8000)
+httpd = HTTPServer(server_address, MyServer)
+httpd.serve_forever()
 
-from django.db import models
-from django.contrib import admin
-class Employee (models.Model):
-    eid=models.CharField(max_length=20,help_text="Employee.ID")
-    name=models.CharField(max_length=100)
-    salary=models.IntegerField()
-    age=models.IntegerField()
-    email=models.EmailField()
-    
-class EmployeeAdmin(admin.ModelAdmin):
-    list_display=('eid','name','salary','age','email')
 ```
 # OUTPUT:
 
