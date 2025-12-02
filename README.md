@@ -8,16 +8,17 @@ To develop a Django application to store and retrieve data from a bank loan data
 
 ## DESIGN STEPS
 ## STEP 1:
-Clone the problem from GitHub
-
+Create a New Django Project
 ## STEP 2:
-Create a new app in Django project
-
+Create a New Django App
 ## STEP 3:
-Enter the code for admin.py and models.py
-
+Define Models for the Bank Loan Database
 ## STEP 4:
-Execute Django admin and create details for 10 books
+Register Models in Django Admin
+## STEP 5:
+Apply Migrations and Enter Data
+## STEP 6:
+Develop Views and Templates to Display Data
 
 # PROGRAM:
 
