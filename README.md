@@ -23,63 +23,26 @@ Develop Views and Templates to Display Data
 # PROGRAM:
 
 ```
-from http.server import HTTPServer, BaseHTTPRequestHandler
+model.py
+from django.db import models
+from django.contrib import admin
 
-content = '''
-<html>
-<head>
-<title>My Laptop</title>
-</head>
-<body>
-<center>
-    <h1>My Laptop Configuration</h1>
-    <table border="5" cellpadding="5" align="center">
-        <tr>
-            <th>System Specs</th>
-            <th>Description</th>
-        </tr>
-        <tr>
-            <td>Processor</td>
-            <td>13th Gen Intel(R) Core(TM) i5-1335U 1.30 GHz</td>
-        </tr>
-        <tr>
-            <td>Operating System</td>
-            <td>Windows 11 Home Single Language 64-bit</td>
-        </tr>
-        <tr>
-            <td>Graphics Card</td>
-            <td>Integrated Intel® Iris® Xe Graphics</td>
-        </tr>
-        <tr>
-            <td>Memory</td>
-            <td>16 GB DDR4-3200MHz (8 GB SODIMM + 8 GB Soldered)</td>
-        </tr>
-        <tr>
-            <td>Storage</td>
-            <td>512 GB SSD M.2 2242 PCIe Gen4 TLC Opal</td>
-        </tr>
-        <tr>
-            <td>Display</td>
-            <td>16-inch WUXGA (1920×1200), IPS, Anti-Glare, 100% sRGB, 300 nits, 60Hz</td>
-        </tr>
-    </table>
-</center>
-</body>
-</html>
-'''
+class Movie(models.Model):
+    title = models.CharField(max_length=50)
+    director = models.CharField(max_length=50)
+    release_date = models.DateField()
+    genre = models.CharField(max_length=30)
+    rating = models.FloatField(default=0.0)
 
-class MyServer(BaseHTTPRequestHandler):
-    def do_GET(self):
-        print("GET request received...")
-        self.send_response(200)
-        self.send_header("Content-type", "text/html")
-        self.end_headers()
-        self.wfile.write(content.encode())
+class MovieAdmin(admin.ModelAdmin):
+    list_display = ('title', 'director', 'release_date', 'genre', 'rating')
 
-print("This is my webserver")
-server_address = ('', 8000)
-httpd = HTTPServer(server_address, MyServer)
-httpd.serve_forever()
+admin.py
+from django.contrib import admin
+from .models import Movie, MovieAdmin
+
+admin.site.register(Movie, MovieAdmin)
+
 
 ```
 # OUTPUT:
